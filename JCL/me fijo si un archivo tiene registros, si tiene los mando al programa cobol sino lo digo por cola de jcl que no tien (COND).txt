@@ -1,0 +1,25 @@
+//KC03A48E JOB 1,REGION=0M,CLASS=A,MSGCLASS=A,MSGLEVEL=1,NOTIFY=&SYSUID                                              
+//*        ,TYPRUN=SCAN 
+//*---------------------------------------------------------------------
+//PASO01   EXEC PGM=IDCAMS
+//SYSPRINT DD SYSOUT=*
+//ENTRADA  DD DSN=ARCHIVO.PARA.DEPOSITOS.DE.LA.S01,DISP=SHR
+//SALIDA   DUMMY
+//SYSIN    DD *
+      REPRO INFILE(ENTRADA) -
+            OUTFILE(SALIDA) -
+            COUN(1)
+//*-------------------------------
+//PASOSI   EXEC PGM=COBOL001,COND=(4,GT,PASO01)
+//ARCH01   DD DSN=ARCHIVO.PARA.DEPOSITOS.DE.LA.S01,DISP=SHR
+//*-------------------------------
+//PASONO   EXEC PGM=IDCAMS,COND=(0,NE,PASO01)
+//SALIDA   DD SYSOUT=*
+//ENTRADA  DD *
+archivo sin datos
+/*
+//SYSPRINT DD SYSOUT=*
+//SYSIN    DD *
+    REPRO INFILE(ENTRADA) -
+          OUTFILE(SALIDA)
+//

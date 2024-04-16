@@ -1,0 +1,50 @@
+Ejemplo 2 RCout 'EXPLICADO':
+
+
+UT1   SEQ,(170)                                      
+UT2   SEQ,R,(170)                                    
+RCOUT 66,4,EQ,'CAPI'.Y.115,15,EQ,'00000000000000{'    ->condicion 'no'
+
+omitir los q cumplan qye
+66-69 = 'capi'
+.Y.
+115-129= '00000000000000{'
+
+SELEC  1,170,,1                                       ->mover 1-170 a pos 1
+
+
+SORT FIELDS=COPY                                                       
+OMIT COND=(66,4,CH,EQ,C'CAPI',AND,115,15,CH,E1,C'00000000000000{')  
+
+e1 = eq ?
+
+omitir los q cumplan qye
+66-69 = 'capi'
+and
+115-129= '00000000000000{'
+
+
+-------------------------------------------------------------------------------------
+Ejemplo 3 Cond 'EXPLICADO':
+Este osgener copiara todo el archivo de entrada al de salida, pisando 
+ciertos datos dependiendo cual condicion se cumpla.
+
+
+UT1     SD                 
+UT2     SD,R,(032)         
+SELEC   1,31,,1/'+',32  -> mover 1-31 a pos 1 y poner en la 32 el '+' 
+COND1   31,1,EQ,'}'     -> si de la 31 a la 31 hay '}'   
+SELEC1  '0-',31            poner '0-' en pos 31
+COND2   31,1,EQ,'J'     -> si de la 31 a la 31 hay 'j'  
+SELEC2  '1-',31            poner '1-' en pos 31
+
+
+
+SORT FIELDS=COPY                        
+OUTREC FIELDS=(1:1,31,              ->mover 1-31 a pos 1		                    
+		32:C'+')            ->poner en la 32 el char '+'     
+OUTFIL FNAMES=SORTOUT,                         
+   IFTHEN=(WHEN=(31,1,CH,EQ,C'}'),  ->si hay '}' en pos 31            
+	OVERLAY=(31:C'0-')),           reemplazar con '0-'    
+   IFTHEN=(WHEN=(31,1,CH,EQ,C'J'),  ->si hay 'j' en pos 31            
+	OVERLAY=(31:C'1-'))     	reemplazar con '1-'

@@ -1,0 +1,40 @@
+version osgener
+
+selec	1,3,,1/';',4		
+->mover de 1-3 a pos 1, poner ';' en pos 4
+selec	199,2,pz,5,3/';',8	
+->mover de 199-200 a pos 5, convertir a pz de long 3, poner ';' en pos 8
+selec	217,2,pz,9,3/';',12
+->mover de 217-218 a pos 9, convertir a pz de long 3, poner ';' en pos 12
+selec	219,2,pz,13,3/';'16
+->mover de 219-220 a pos 13, convertir a pz de long 3, poner ';' en pos 16
+selec	221,4,,17/';',21
+->mover de 221-224 a pos 17, poner ';' en pos 21
+selec	225,2,pz,22,3/';',25
+->mover de 225-226 a pos 22, convertir a pz de long 3, poner ';' en pos 25
+selec	4,3,pz,26,5
+->mover de 4-6 a pos 26, convertir a pz de long 5
+
+
+version sort
+
+sort fields=copy
+OUTREC FIELDS=(1:1,3,              -->mover 1-3 a pos 1		                    
+		4:C';',            -->poner en la 4 el char ';' 
+		5:199,2,	   -->MOVER 199-200 A POS 5
+		PD,TO=ZD,LENGHT=3, -->CONVERTIR A ZD LONG 3
+		8:C';',		   -->PONER EN LA 8 ';'
+		9:217,2,	   -->mover de 217-218 a pos 9
+		PD,TO=ZD,LENGHT=3, -->CONVERTIR A ZD LONG 3
+		12:C';',	   -->PONER EN LA 12 ';'
+		13:219,2,	   -->mover de 219-220 a pos 13
+		PD,TO=ZD,LENGHT=3, -->CONVERTIR A ZD LONG 3
+		16:C';',	   -->PONER EN LA 16 ';'
+		17:221,4,	   -->mover de 221-224 a pos 17
+		21:C';',	   -->PONER EN LA 21 ';'
+		22:225,2,	   -->mover de 225-226 a pos 22
+		PD,TO=ZD,LENGHT=3, -->CONVERTIR A ZD LONG 3
+		25:C';',	   -->PONER EN LA 25 ';'
+		26:4,2,  	   -->mover de 4-6 a pos 26
+		PD,TO=ZD,LENGHT=5) -->CONVERTIR A ZD LONG 3
+END
